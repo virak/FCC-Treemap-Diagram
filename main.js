@@ -1,69 +1,41 @@
 /* global d3 */
-/* eslint-disable max-len */
-
-// eslint-disable-next-line no-unused-vars
-const projectName = 'tree-map'
-
-// Coded by @paycoguy & @Christian-Paul
 const DATASETS = {
   videogames: {
-    TITLE: 'Video Game Sales',
-    DESCRIPTION: 'Top 100 Most Sold Video Games Grouped by Platform',
     FILE_PATH:
       'https://cdn.rawgit.com/freeCodeCamp/testable-projects-fcc/a80ce8f9/src/data/tree_map/video-game-sales-data.json'
-  },
-  movies: {
-    TITLE: 'Movie Sales',
-    DESCRIPTION: 'Top 100 Highest Grossing Movies Grouped By Genre',
-    FILE_PATH:
-      'https://cdn.rawgit.com/freeCodeCamp/testable-projects-fcc/a80ce8f9/src/data/tree_map/movie-data.json'
-  },
-  kickstarter: {
-    TITLE: 'Kickstarter Pledges',
-    DESCRIPTION:
-      'Top 100 Most Pledged Kickstarter Campaigns Grouped By Category',
-    FILE_PATH:
-      'https://cdn.rawgit.com/freeCodeCamp/testable-projects-fcc/a80ce8f9/src/data/tree_map/kickstarter-funding-data.json'
   }
 }
 
-var urlParams = new URLSearchParams(window.location.search)
+const urlParams = new URLSearchParams(window.location.search)
 const DEFAULT_DATASET = 'videogames'
 const DATASET = DATASETS[urlParams.get('data') || DEFAULT_DATASET]
-// const dataSelector = document.getElementById("data-selector");
 
-// dataSelector.innerHTML = '<a>' + DATASETS[0].TITLE + '</a>' + '/' + '<a>' + DATASETS[1].TITLE + '</a>' + '/' + '<a>' + DATASETS[2].TITLE + '</a>';
-
-document.getElementById('title').innerHTML = DATASET.TITLE
-document.getElementById('description').innerHTML = DATASET.DESCRIPTION
-
-// Define body
-var body = d3.select('body')
+const body = d3.select('body')
 
 // Define the div for the tooltip
-var tooltip = body
+const tooltip = body
   .append('div')
   .attr('class', 'tooltip')
   .attr('id', 'tooltip')
   .style('opacity', 0)
 
-var svg = d3.select('#tree-map')
-var width = +svg.attr('width')
-var height = +svg.attr('height')
+const svg = d3.select('#tree-map')
+const width = +svg.attr('width')
+const height = +svg.attr('height')
 
-var fader = function (color) {
+const fader = function (color) {
   return d3.interpolateRgb(color, '#fff')(0.2)
 }
-var color = d3.scaleOrdinal(d3.schemeCategory20.map(fader))
+const color = d3.scaleOrdinal(d3.schemeCategory20.map(fader))
 
-var treemap = d3.treemap().size([width, height]).paddingInner(1)
+const treemap = d3.treemap().size([width, height]).paddingInner(1)
 
 d3.json(DATASET.FILE_PATH, function (error, data) {
   if (error) {
     throw error
   }
 
-  var root = d3
+  const root = d3
     .hierarchy(data)
     .eachBefore(function (d) {
       d.data.id = (d.parent ? d.parent.data.id + '.' : '') + d.data.name
@@ -75,7 +47,7 @@ d3.json(DATASET.FILE_PATH, function (error, data) {
 
   treemap(root)
 
-  var cell = svg
+  const cell = svg
     .selectAll('g')
     .data(root.leaves())
     .enter()
@@ -146,23 +118,23 @@ d3.json(DATASET.FILE_PATH, function (error, data) {
       return d
     })
 
-  var categories = root.leaves().map(function (nodes) {
+  let categories = root.leaves().map(function (nodes) {
     return nodes.data.category
   })
   categories = categories.filter(function (category, index, self) {
     return self.indexOf(category) === index
   })
-  var legend = d3.select('#legend')
-  var legendWidth = +legend.attr('width')
+  const legend = d3.select('#legend')
+  const legendWidth = +legend.attr('width')
   const LEGEND_OFFSET = 10
   const LEGEND_RECT_SIZE = 15
   const LEGEND_H_SPACING = 150
   const LEGEND_V_SPACING = 10
   const LEGEND_TEXT_X_OFFSET = 3
   const LEGEND_TEXT_Y_OFFSET = -2
-  var legendElemsPerRow = Math.floor(legendWidth / LEGEND_H_SPACING)
+  const legendElemsPerRow = Math.floor(legendWidth / LEGEND_H_SPACING)
 
-  var legendElem = legend
+  const legendElem = legend
     .append('g')
     .attr('transform', 'translate(60,' + LEGEND_OFFSET + ')')
     .selectAll('g')
