@@ -1,14 +1,4 @@
 /* global d3 */
-const DATASETS = {
-  videogames: {
-    FILE_PATH:
-      'https://cdn.rawgit.com/freeCodeCamp/testable-projects-fcc/a80ce8f9/src/data/tree_map/video-game-sales-data.json'
-  }
-}
-
-const urlParams = new URLSearchParams(window.location.search)
-const DEFAULT_DATASET = 'videogames'
-const DATASET = DATASETS[urlParams.get('data') || DEFAULT_DATASET]
 
 const body = d3.select('body')
 
@@ -30,7 +20,8 @@ const color = d3.scaleOrdinal(d3.schemeCategory20.map(fader))
 
 const treemap = d3.treemap().size([width, height]).paddingInner(1)
 
-d3.json(DATASET.FILE_PATH, function (error, data) {
+const dataSetUrl = 'https://cdn.rawgit.com/freeCodeCamp/testable-projects-fcc/a80ce8f9/src/data/tree_map/video-game-sales-data.json'
+d3.json(dataSetUrl, function (error, data) {
   if (error) {
     throw error
   }
