@@ -1,0 +1,50 @@
+body {
+  background-image: url("https://www.pikpng.com/pngl/b/563-5633349_games-png-image-rpg-video-game-characters-clipart.png");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+#title {
+  background-color: black;
+  color: white;
+  border-radius: 20px;
+  margin-top: 20px;
+  padding: 15px;
+  text-align: center;
+}
+
+#description {
+  background-color: rgb(70, 70, 70);
+  color: white;
+  border-radius: 20px;
+  margin-top: 10px;
+  padding: 10px;
+  text-align: center;
+}
+
+.legendContainer {
+  width: 500px;
+  margin: 0 auto;
+  background-color: #fff;
+  border-radius: 20px;
+  padding: 30px;
+  margin-bottom: 20px;
+  border: 1px solid rgb(87, 87, 87);
+}
+
+.treeMapContainer {
+  width: 990px;
+  margin: 0 auto;
+  background-color: #fff;
+}
+
+.tooltip {
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.tile-text {
+  color: grey;
+  font-size: 12px;
+}
